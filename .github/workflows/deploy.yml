@@ -1,0 +1,23 @@
+name: Deploy Production
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  kamal:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_BUILDKIT: 1
+      RAILS_ENV: production
+    environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
