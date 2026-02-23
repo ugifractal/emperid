@@ -42,8 +42,7 @@ jobs:
 
       - name: Clone repo external
         run: |
-          git clone ssh://sugiarto@drx.catfish-algol.ts.net:/home/sugiarto/gits/emperid.git
-          cd emperid
+          git clone ssh://sugiarto@drx.catfish-algol.ts.net:/home/sugiarto/gits/emperid.git .
 
       - name: Install Kamal
         run: gem install kamal
