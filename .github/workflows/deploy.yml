@@ -44,6 +44,17 @@ jobs:
         run: |
           git clone ssh://sugiarto@drx.catfish-algol.ts.net:/home/sugiarto/gits/emperid.git .
 
+      - name: Build & Push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/ugifractal/emperid:latest
+            ghcr.io/ugifractal/emperid:${{ github.sha }}
+          labels: |
+            service=emperid
+
       - name: Install Kamal
         run: gem install kamal
 
