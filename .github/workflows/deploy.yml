@@ -35,3 +35,21 @@ jobs:
         run: |
           git clone ssh://sugiarto@drx.catfish-algol.ts.net:/home/sugiarto/gits/emperid.git
           cd emperid
+
+      - name: Install Kamal
+        run: gem install kamal
+
+      - name: Create Kamal secrets file
+        run: |
+          mkdir -p .kamal
+          cat <<EOF > .kamal/secrets
+          TAILSCALE_AUTHKEY=${{ secrets.TAILSCALE_AUTHKEY }}
+          EOF
+
+      - name: Debug
+        run: cat .kamal/secrets
+
+      - name: Deploy via Kamal
+        run: kamal deploy --skip-push
+        env:
+          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
