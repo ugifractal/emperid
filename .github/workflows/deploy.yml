@@ -14,9 +14,14 @@ jobs:
     env:
       DOCKER_BUILDKIT: 1
       RAILS_ENV: production
-    environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
+    environment: production
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: webfactory/ssh-agent@v0.9.0
         with:
-          fetch-depth: 0
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Clone repo external
+        run: |
+          git clone ssh://sugiarto@drx.catfish-algol.ts.net:/home/sugiarto/gits/emperid.git
+          cd emperid
