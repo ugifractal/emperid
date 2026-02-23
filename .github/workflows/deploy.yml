@@ -62,6 +62,10 @@ jobs:
         run: |
           mkdir -p .kamal
           cat <<EOF > .kamal/secrets
+          DATABASE_CACHE_URL=${{ secrets.DATABASE_CACHE_URL }}
+          DATABASE_QUEUE_URL=${{ secrets.DATABASE_QUEUE_URL }}
+          DATABASE_CABLE_URL=${{ secrets.DATABASE_CABLE_URL }}
+          DATABASE_URL=${{ secrets.DATABASE_URL }}
           GHCR_TOKEN=${{ secrets.GHCR_TOKEN }}
           TAILSCALE_AUTHKEY=${{ secrets.TAILSCALE_AUTHKEY }}
           EOF
