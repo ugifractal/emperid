@@ -51,6 +51,7 @@ jobs:
         run: |
           mkdir -p .kamal
           cat <<EOF > .kamal/secrets
+          GHCR_TOKEN=${{ secrets.GHCR_TOKEN }}
           TAILSCALE_AUTHKEY=${{ secrets.TAILSCALE_AUTHKEY }}
           EOF
 
